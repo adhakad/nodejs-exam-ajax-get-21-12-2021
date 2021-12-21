@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= title %></title>
+    
+    <link type="text/css" rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+    <link type="text/css" rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+    <link type="text/css" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css">
+    <link type="text/css" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.theme.default.min.css">
+    <link type="text/css" rel="stylesheet" href="styleses.css">
+    <link type="text/css" rel="stylesheet" href="sty.css">
+    <style>
+      .clearfix{
+         overflow: auto;
+      }
+   </style>
+</head>
+<body>
+  
+  <h5 style="color:#fff;margin-left:8%;font-size: 50px;color: rgb(66, 15, 184);">TechBista</h5></div>
+    <div class="container-fluid" style="background-color: rgb(250, 248, 252);">
+      <div class='row'><input type="button" class="submit btn btn-success" eid="<%= data.eid %>" value="Submit Quiz">&nbsp;</div>
+      <div class="row" style="margin-top: 30px;">
+        <div class="col-lg-10 col-lg-push-1" style="background-color: #fff;" id="load_questions"></div>
+      </div>
+    
+       <div class="row">
+        <div class="col-lg-6 col-lg-push-3" style="min-height: 50px; margin-top: 10px;">
+            <div class="col-lg-12 text-center">
+              <input type="button" class="previous btn btn-success" value="Previous">&nbsp;
+              <input type="button" class="next btn btn-success" value="Next">&nbsp;
+            </div>
+        </div>
+    </div>
+    </div>
+
+
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>
+  <script src="https://cdn.ckeditor.com/4.9.1/standard/ckeditor.js"></script>
+  <script src="main.js" defer></script>
+
+
+<script>
+$(document).ready(function(){
+  var abc;
+  var total;
+  $(".next").on('click', function(event) { 
+    event.preventDefault()  
+    var sn = abc;
+    if(sn<total){
+      sn++
+      $.ajax({
+        type : "GET",
+        url : "/datas/"+sn,
+        dataType:'json',
+        success:function(response){
+          if(response.msg=='yes'){
+            var radioAns = response.radioAns;
+            if(radioAns==1234567890){
+              $('#load_questions').html("<div><p>"+response.sn+"</p><h2>"+response.qns+"</h2></div><div><input name='ans' type='radio' value='"+response.ans_sn1+"' onclick='radioclick(this.value,"+response.sn+")'><label>"+response.opt1+"</label></div><div><input id='ans2' name='ans' type='radio' value='"+response.ans_sn2+"' onclick='radioclick(this.value,"+response.sn+")'><label>"+response.opt2+"</label></div><div><input id='ans3' name='ans' type='radio' value='"+response.ans_sn3+"' onclick='radioclick(this.value,"+response.sn+")'><label>"+response.opt3+"</label></div><div><input id='ans4' name='ans' type='radio' value='"+response.ans_sn4+"' onclick='radioclick(this.value,"+response.sn+")'><label>"+response.opt4+"</label></div>")
+            }else if(radioAns==1){
+              $('#load_questions').html("<div><p>"+response.sn+"</p><h2>"+response.qns+"</h2></div><div><input name='ans' type='radio' value='"+response.ans_sn1+"' onclick='radioclick(this.value,"+response.sn+")' checked><label>"+response.opt1+"</label></div><div><input id='ans2' name='ans' type='radio' value='"+response.ans_sn2+"' onclick='radioclick(this.value,"+response.sn+")'><label>"+response.opt2+"</label></div><div><input id='ans3' name='ans' type='radio' value='"+response.ans_sn3+"' onclick='radioclick(this.value,"+response.sn+")'><label>"+response.opt3+"</label></div><div><input id='ans4' name='ans' type='radio' value='"+response.ans_sn4+"' onclick='radioclick(this.value,"+response.sn+")'><label>"+response.opt4+"</label></div>")
+            }else if(radioAns==2){
+              $('#load_questions').html("<div><p>"+response.sn+"</p><h2>"+response.qns+"</h2></div><div><input name='ans' type='radio' value='"+response.ans_sn1+"' onclick='radioclick(this.value,"+response.sn+")'><label>"+response.opt1+"</label></div><div><input id='ans2' name='ans' type='radio' value='"+response.ans_sn2+"' onclick='radioclick(this.value,"+response.sn+")' checked><label>"+response.opt2+"</label></div><div><input id='ans3' name='ans' type='radio' value='"+response.ans_sn3+"' onclick='radioclick(this.value,"+response.sn+")'><label>"+response.opt3+"</label></div><div><input id='ans4' name='ans' type='radio' value='"+response.ans_sn4+"' onclick='radioclick(this.value,"+response.sn+")'><label>"+response.opt4+"</label></div>")
+            }else if(radioAns==3){
+              $('#load_questions').html("<div><p>"+response.sn+"</p><h2>"+response.qns+"</h2></div><div><input name='ans' type='radio' value='"+response.ans_sn1+"' onclick='radioclick(this.value,"+response.sn+")'><label>"+response.opt1+"</label></div><div><input id='ans2' name='ans' type='radio' value='"+response.ans_sn2+"' onclick='radioclick(this.value,"+response.sn+")'><label>"+response.opt2+"</label></div><div><input id='ans3' name='ans' type='radio' value='"+response.ans_sn3+"' onclick='radioclick(this.value,"+response.sn+")' checked><label>"+response.opt3+"</label></div><div><input id='ans4' name='ans' type='radio' value='"+response.ans_sn4+"' onclick='radioclick(this.value,"+response.sn+")'><label>"+response.opt4+"</label></div>")
+            }else if(radioAns==4){
+              $('#load_questions').html("<div><p>"+response.sn+"</p><h2>"+response.qns+"</h2></div><div><input name='ans' type='radio' value='"+response.ans_sn1+"' onclick='radioclick(this.value,"+response.sn+")'><label>"+response.opt1+"</label></div><div><input id='ans2' name='ans' type='radio' value='"+response.ans_sn2+"' onclick='radioclick(this.value,"+response.sn+")'><label>"+response.opt2+"</label></div><div><input id='ans3' name='ans' type='radio' value='"+response.ans_sn3+"' onclick='radioclick(this.value,"+response.sn+")'><label>"+response.opt3+"</label></div><div><input id='ans4' name='ans' type='radio' value='"+response.ans_sn4+"' onclick='radioclick(this.value,"+response.sn+")' checked><label>"+response.opt4+"</label></div>")
+            }else{
+              $('#load_questions').html("<div><p>"+response.sn+"</p><h2>"+response.qns+"</h2></div><div><input name='ans' type='radio' value='"+response.ans_sn1+"' onclick='radioclick(this.value,"+response.sn+")'><label>"+response.opt1+"</label></div><div><input id='ans2' name='ans' type='radio' value='"+response.ans_sn2+"' onclick='radioclick(this.value,"+response.sn+")'><label>"+response.opt2+"</label></div><div><input id='ans3' name='ans' type='radio' value='"+response.ans_sn3+"' onclick='radioclick(this.value,"+response.sn+")'><label>"+response.opt3+"</label></div><div><input id='ans4' name='ans' type='radio' value='"+response.ans_sn4+"' onclick='radioclick(this.value,"+response.sn+")'><label>"+response.opt4+"</label></div>")
+            }
+            abc = response.sn;
+            total = response.total;
+          }
+        },
+        error:function(response){
+          alert('server error');
+        }
+      });
+    }
+  })
+  /**************/
+  $(".previous").on('click', function(event) {
+    event.preventDefault() 
+    var snn = abc;
+    if(1<snn && total){
+      snn--;  
+      $.ajax({
+        type : "GET",
+        url : "/datass/"+snn,
+        dataType:'json',
+        success:function(response){
+          if(response.msg=='yess'){
+            var radioAns = response.radioAns;
+            if(radioAns==1234567890){
+              $('#load_questions').html("<div><p>"+response.sn+"</p><h2>"+response.qns+"</h2></div><div><input name='ans' type='radio' value='"+response.ans_sn1+"' onclick='radioclick(this.value,"+response.sn+")'><label>"+response.opt1+"</label></div><div><input id='ans2' name='ans' type='radio' value='"+response.ans_sn2+"' onclick='radioclick(this.value,"+response.sn+")'><label>"+response.opt2+"</label></div><div><input id='ans3' name='ans' type='radio' value='"+response.ans_sn3+"' onclick='radioclick(this.value,"+response.sn+")'><label>"+response.opt3+"</label></div><div><input id='ans4' name='ans' type='radio' value='"+response.ans_sn4+"' onclick='radioclick(this.value,"+response.sn+")'><label>"+response.opt4+"</label></div>")
+            }else if(radioAns==1){
+              $('#load_questions').html("<div><p>"+response.sn+"</p><h2>"+response.qns+"</h2></div><div><input name='ans' type='radio' value='"+response.ans_sn1+"' onclick='radioclick(this.value,"+response.sn+")' checked><label>"+response.opt1+"</label></div><div><input id='ans2' name='ans' type='radio' value='"+response.ans_sn2+"' onclick='radioclick(this.value,"+response.sn+")'><label>"+response.opt2+"</label></div><div><input id='ans3' name='ans' type='radio' value='"+response.ans_sn3+"' onclick='radioclick(this.value,"+response.sn+")'><label>"+response.opt3+"</label></div><div><input id='ans4' name='ans' type='radio' value='"+response.ans_sn4+"' onclick='radioclick(this.value,"+response.sn+")'><label>"+response.opt4+"</label></div>")
+            }else if(radioAns==2){
+              $('#load_questions').html("<div><p>"+response.sn+"</p><h2>"+response.qns+"</h2></div><div><input name='ans' type='radio' value='"+response.ans_sn1+"' onclick='radioclick(this.value,"+response.sn+")'><label>"+response.opt1+"</label></div><div><input id='ans2' name='ans' type='radio' value='"+response.ans_sn2+"' onclick='radioclick(this.value,"+response.sn+")' checked><label>"+response.opt2+"</label></div><div><input id='ans3' name='ans' type='radio' value='"+response.ans_sn3+"' onclick='radioclick(this.value,"+response.sn+")'><label>"+response.opt3+"</label></div><div><input id='ans4' name='ans' type='radio' value='"+response.ans_sn4+"' onclick='radioclick(this.value,"+response.sn+")'><label>"+response.opt4+"</label></div>")
+            }else if(radioAns==3){
+              $('#load_questions').html("<div><p>"+response.sn+"</p><h2>"+response.qns+"</h2></div><div><input name='ans' type='radio' value='"+response.ans_sn1+"' onclick='radioclick(this.value,"+response.sn+")'><label>"+response.opt1+"</label></div><div><input id='ans2' name='ans' type='radio' value='"+response.ans_sn2+"' onclick='radioclick(this.value,"+response.sn+")'><label>"+response.opt2+"</label></div><div><input id='ans3' name='ans' type='radio' value='"+response.ans_sn3+"' onclick='radioclick(this.value,"+response.sn+")' checked><label>"+response.opt3+"</label></div><div><input id='ans4' name='ans' type='radio' value='"+response.ans_sn4+"' onclick='radioclick(this.value,"+response.sn+")'><label>"+response.opt4+"</label></div>")
+            }else if(radioAns==4){
+              $('#load_questions').html("<div><p>"+response.sn+"</p><h2>"+response.qns+"</h2></div><div><input name='ans' type='radio' value='"+response.ans_sn1+"' onclick='radioclick(this.value,"+response.sn+")'><label>"+response.opt1+"</label></div><div><input id='ans2' name='ans' type='radio' value='"+response.ans_sn2+"' onclick='radioclick(this.value,"+response.sn+")'><label>"+response.opt2+"</label></div><div><input id='ans3' name='ans' type='radio' value='"+response.ans_sn3+"' onclick='radioclick(this.value,"+response.sn+")'><label>"+response.opt3+"</label></div><div><input id='ans4' name='ans' type='radio' value='"+response.ans_sn4+"' onclick='radioclick(this.value,"+response.sn+")' checked><label>"+response.opt4+"</label></div>")
+            }else{
+              $('#load_questions').html("<div><p>"+response.sn+"</p><h2>"+response.qns+"</h2></div><div><input name='ans' type='radio' value='"+response.ans_sn1+"' onclick='radioclick(this.value,"+response.sn+")'><label>"+response.opt1+"</label></div><div><input id='ans2' name='ans' type='radio' value='"+response.ans_sn2+"' onclick='radioclick(this.value,"+response.sn+")'><label>"+response.opt2+"</label></div><div><input id='ans3' name='ans' type='radio' value='"+response.ans_sn3+"' onclick='radioclick(this.value,"+response.sn+")'><label>"+response.opt3+"</label></div><div><input id='ans4' name='ans' type='radio' value='"+response.ans_sn4+"' onclick='radioclick(this.value,"+response.sn+")'><label>"+response.opt4+"</label></div>")
+            }
+            abc = response.sn;
+            total = response.total;
+          }
+        },
+        error:function(response){
+          alert('server error');
+        }
+      });
+    }
+  })
+  /*********************/ 
+  abcd();
+  function abcd(){
+    var sn =1;
+    
+    $.ajax({
+      type : "GET",
+      url : "/data/"+sn,
+      dataType:'json',
+      success:function(response){
+        if(response.msg=='success'){
+          var radioAns = response.radioAns;
+            if(radioAns==1234567890){
+              $('#load_questions').html("<div><p>"+response.sn+"</p><h2>"+response.qns+"</h2></div><div><input name='ans' type='radio' value='"+response.ans_sn1+"' onclick='radioclick(this.value,"+response.sn+")'><label>"+response.opt1+"</label></div><div><input id='ans2' name='ans' type='radio' value='"+response.ans_sn2+"' onclick='radioclick(this.value,"+response.sn+")'><label>"+response.opt2+"</label></div><div><input id='ans3' name='ans' type='radio' value='"+response.ans_sn3+"' onclick='radioclick(this.value,"+response.sn+")'><label>"+response.opt3+"</label></div><div><input id='ans4' name='ans' type='radio' value='"+response.ans_sn4+"' onclick='radioclick(this.value,"+response.sn+")'><label>"+response.opt4+"</label></div>")
+            }else if(radioAns==1){
+              $('#load_questions').html("<div><p>"+response.sn+"</p><h2>"+response.qns+"</h2></div><div><input name='ans' type='radio' value='"+response.ans_sn1+"' onclick='radioclick(this.value,"+response.sn+")' checked><label>"+response.opt1+"</label></div><div><input id='ans2' name='ans' type='radio' value='"+response.ans_sn2+"' onclick='radioclick(this.value,"+response.sn+")'><label>"+response.opt2+"</label></div><div><input id='ans3' name='ans' type='radio' value='"+response.ans_sn3+"' onclick='radioclick(this.value,"+response.sn+")'><label>"+response.opt3+"</label></div><div><input id='ans4' name='ans' type='radio' value='"+response.ans_sn4+"' onclick='radioclick(this.value,"+response.sn+")'><label>"+response.opt4+"</label></div>")
+            }else if(radioAns==2){
+              $('#load_questions').html("<div><p>"+response.sn+"</p><h2>"+response.qns+"</h2></div><div><input name='ans' type='radio' value='"+response.ans_sn1+"' onclick='radioclick(this.value,"+response.sn+")'><label>"+response.opt1+"</label></div><div><input id='ans2' name='ans' type='radio' value='"+response.ans_sn2+"' onclick='radioclick(this.value,"+response.sn+")' checked><label>"+response.opt2+"</label></div><div><input id='ans3' name='ans' type='radio' value='"+response.ans_sn3+"' onclick='radioclick(this.value,"+response.sn+")'><label>"+response.opt3+"</label></div><div><input id='ans4' name='ans' type='radio' value='"+response.ans_sn4+"' onclick='radioclick(this.value,"+response.sn+")'><label>"+response.opt4+"</label></div>")
+            }else if(radioAns==3){
+              $('#load_questions').html("<div><p>"+response.sn+"</p><h2>"+response.qns+"</h2></div><div><input name='ans' type='radio' value='"+response.ans_sn1+"' onclick='radioclick(this.value,"+response.sn+")'><label>"+response.opt1+"</label></div><div><input id='ans2' name='ans' type='radio' value='"+response.ans_sn2+"' onclick='radioclick(this.value,"+response.sn+")'><label>"+response.opt2+"</label></div><div><input id='ans3' name='ans' type='radio' value='"+response.ans_sn3+"' onclick='radioclick(this.value,"+response.sn+")' checked><label>"+response.opt3+"</label></div><div><input id='ans4' name='ans' type='radio' value='"+response.ans_sn4+"' onclick='radioclick(this.value,"+response.sn+")'><label>"+response.opt4+"</label></div>")
+            }else if(radioAns==4){
+              $('#load_questions').html("<div><p>"+response.sn+"</p><h2>"+response.qns+"</h2></div><div><input name='ans' type='radio' value='"+response.ans_sn1+"' onclick='radioclick(this.value,"+response.sn+")'><label>"+response.opt1+"</label></div><div><input id='ans2' name='ans' type='radio' value='"+response.ans_sn2+"' onclick='radioclick(this.value,"+response.sn+")'><label>"+response.opt2+"</label></div><div><input id='ans3' name='ans' type='radio' value='"+response.ans_sn3+"' onclick='radioclick(this.value,"+response.sn+")'><label>"+response.opt3+"</label></div><div><input id='ans4' name='ans' type='radio' value='"+response.ans_sn4+"' onclick='radioclick(this.value,"+response.sn+")' checked><label>"+response.opt4+"</label></div>")
+            }else{
+              $('#load_questions').html("<div><p>"+response.sn+"</p><h2>"+response.qns+"</h2></div><div><input name='ans' type='radio' value='"+response.ans_sn1+"' onclick='radioclick(this.value,"+response.sn+")'><label>"+response.opt1+"</label></div><div><input id='ans2' name='ans' type='radio' value='"+response.ans_sn2+"' onclick='radioclick(this.value,"+response.sn+")'><label>"+response.opt2+"</label></div><div><input id='ans3' name='ans' type='radio' value='"+response.ans_sn3+"' onclick='radioclick(this.value,"+response.sn+")'><label>"+response.opt3+"</label></div><div><input id='ans4' name='ans' type='radio' value='"+response.ans_sn4+"' onclick='radioclick(this.value,"+response.sn+")'><label>"+response.opt4+"</label></div>")
+            }
+            abc = response.sn;  
+            total = response.total;
+        }
+      },
+      error:function(response){
+        alert('server error');
+      }
+    });
+  }
+/*****************************************/
+$(".submit").on('click', function(event) {
+    event.preventDefault() 
+    const eid = $(event.target).attr('eid')
+
+    $.ajax({
+      type : "POST",
+      url : "/exam/exmResult", 
+      data : {eid:eid},
+      dataType : 'json',
+      success : function(response, status, xhr) { 
+        if(response.msg=='success'){
+          $('#load_questions').html("<div><h2>Total Questions</h2><h2>"+total+"</h2></div><div><h2>Attempted Qusetions</h2><h2>"+response.attempted_que+"</h2></div><div><h2>Right Answer</h2><h2>"+response.right+"</h2></div><div><h2>Wrong Answer</h2><h2>"+response.wrong_ans+"</h2></div>")
+        }    
+      },
+
+
+      error : function(e) {
+        $("#postResultDiv").html("<p>" + "Post Already Exist On MongoDB Database! <br>" +"</p>"); 
+      }
+    })
+  
+  })
+
+
+
+});
+
+function radioclick(radiovalue,qsn)
+        {
+          $.ajax({
+        type : "POST",
+        url : "/exam/opt",
+        dataType:'json',
+        data:{slt_opt:radiovalue ,slt_qsn:qsn},
+        success:function(response){
+          if(response.msg=='success'){
+            console.log("data insert")
+          }
+        },
+        error:function(response){
+          alert('server error');
+        }
+      });
+        }
+</script>
+
+       </body>
+     </html>
+
+     
+
